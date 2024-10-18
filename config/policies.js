@@ -24,5 +24,11 @@ module.exports.policies = {
   // '*': true, // Erlaube den Zugriff auf alle Controller und Aktionen
   ShopController: {
     '*': true, // Erlaube den Zugriff auf alle Aktionen im ShopController
+  },
+  InventoryController: {
+    '*': true,
+  },
+  VendingController: {
+    '*': true,
   }
 };

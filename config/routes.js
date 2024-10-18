@@ -70,7 +70,8 @@ module.exports.routes = {
   'PATCH /api/v1/shop/:id': 'ShopController.patch',
 
   'POST /api/v1/shop/:shopId/inventory': 'InventoryController.create',
-  'GET /api/v1/shop/:shopId/inventory/:id': 'InventoryController.read',
+  'GET /api/v1/inventory/:id': 'InventoryController.read',
+  'GET /api/v1/shop/:shopId/inventory': 'InventoryController.readByShopId',
   'PUT /api/v1/shop/:shopId/inventory/:id': 'InventoryController.update',
   'DELETE /api/v1/shop/:shopId/inventory/:id': 'InventoryController.delete',
 

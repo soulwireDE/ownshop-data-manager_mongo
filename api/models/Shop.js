@@ -10,7 +10,7 @@ module.exports = {
     name: { type: 'string', required: true },
     label: { type: 'string', required: true },
     description: { type: 'string' },
-    id: { type: 'string', unique: true, required: true },
+    uuid: { type: 'string', unique: true, required: true },
     ped: { type: 'string' },
     scenario: { type: 'string' },
     radius: { type: 'number' },

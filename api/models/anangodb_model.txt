@@ -1,0 +1,19 @@
+// api/models/Post.js
+module.exports = {
+  datastore: 'default',
+  primaryKey: '_key',
+
+  attributes: {
+    title: {
+      type: 'string',
+      required: true
+    },
+    content: {
+      type: 'string',
+      required: true
+    },
+    user: {
+      model: 'user'
+    }
+  }
+};

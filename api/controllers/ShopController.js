@@ -10,7 +10,7 @@ module.exports = {
     try {
       const uuid = await sails.helpers.generateUuid();
       const bodyData = req.body;
-      bodyData.id = uuid;
+      bodyData.uuid = uuid;
       bodyData.updatedAt = Date.now();
       bodyData.createdAt = Date.now();
 
@@ -22,7 +22,7 @@ module.exports = {
   },
   read: async function (req, res) {
     try {
-      const shop = await Shop.findOne({ id: req.params.id }).populateAll();
+      const shop = await Shop.findOne({ uuid: req.params.id }).populateAll();
       if (!shop) return res.notFound();
       return res.json(shop);
     } catch (err) {
@@ -31,7 +31,7 @@ module.exports = {
   },
   update: async function (req, res) {
     try {
-      const updatedShop = await Shop.updateOne({ id: req.params.id }).set(req.body);
+      const updatedShop = await Shop.updateOne({ uuid: req.params.id }).set(req.body);
       if (!updatedShop) return res.notFound();
       return res.json(updatedShop);
     } catch (err) {
@@ -40,7 +40,7 @@ module.exports = {
   },
   delete: async function (req, res) {
     try {
-      const deletedShop = await Shop.destroyOne({ id: req.params.id });
+      const deletedShop = await Shop.destroyOne({ uuid: req.params.id });
       if (!deletedShop) return res.notFound();
       return res.ok();
     } catch (err) {
@@ -69,10 +69,10 @@ module.exports = {
       }
 
       // Finde das Shop-Modell, das aktualisiert werden soll
-      const shop = await Shop.findOne({ id: shopId });
+      const shop = await Shop.findOne({ uuid: shopId });
       if (!shop) return res.notFound({ message: 'Shop not found' });
 
-      const updatedShop = await Shop.updateOne({ id: shopId }).set(updateData);
+      const updatedShop = await Shop.updateOne({ uuid: shopId }).set(updateData);
 
       if (!updatedShop) return res.notFound({ message: 'Shop not updated' });
 

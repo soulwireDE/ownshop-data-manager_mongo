@@ -1,0 +1,20 @@
+// api/models/User.js
+module.exports = {
+  datastore: 'default', // Verweist auf den in config/datastores.js definierten Adapter
+  primaryKey: '_key',
+
+  attributes: {
+    name: {
+      type: 'string',
+      required: true
+    },
+    age: {
+      type: 'number',
+      required: true
+    },
+    posts: {
+      collection: 'post',
+      via: 'user'
+    }
+  }
+};

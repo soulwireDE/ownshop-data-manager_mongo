@@ -7,9 +7,17 @@
 
 module.exports = {
   attributes: {
+
     name: { type: 'string', required: true },
-    quantity: { type: 'number', required: true },
-    shop: { model: 'shop' } // Referenz auf den Shop
+    items: {
+      type: 'json',  // Hier wird die verschachtelte Struktur für Artikel gespeichert
+      columnType: 'object',  // Die Art von Daten, die gespeichert werden (Objekte)
+      required: true
+    },
+
+    // Referenz auf den zugehörigen Shop
+    shop: { model: 'shop' },
+    uuid: { type: 'string', unique: true, required: true },
   }
 };
 

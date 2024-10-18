@@ -142,10 +142,8 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           }
         }
       },
@@ -158,7 +156,8 @@
           {
             "required": [
               "name",
-              "quantity"
+              "items",
+              "uuid"
             ]
           }
         ]
@@ -176,18 +175,13 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           },
           "name": {
             "type": "string"
           },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
+          "items": {},
           "shop": {
             "description": "JSON dictionary representing the **shop** instance or FK when creating / updating / not populated",
             "oneOf": [
@@ -195,6 +189,10 @@
                 "$ref": "#/components/schemas/shop"
               }
             ]
+          },
+          "uuid": {
+            "type": "string",
+            "uniqueItems": true
           }
         }
       },
@@ -206,9 +204,9 @@
           },
           {
             "required": [
-              "id",
               "name",
-              "label"
+              "label",
+              "uuid"
             ]
           }
         ]
@@ -237,6 +235,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "uuid": {
+            "type": "string",
+            "uniqueItems": true
           },
           "ped": {
             "type": "string"
@@ -323,10 +325,8 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           },
           "visitors": {
             "type": "number",
@@ -396,10 +396,8 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           },
           "emailAddress": {
             "type": "string",
@@ -528,10 +526,8 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           },
           "name": {
             "type": "string"
@@ -588,10 +584,8 @@
             "format": "double"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "uniqueItems": true,
-            "description": "Note Sails special attributes: autoIncrement"
+            "type": "string",
+            "uniqueItems": true
           }
         }
       }
@@ -1226,7 +1220,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "createdAt,updatedAt,id,name,label,description,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
+              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
             },
             "description": "The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes."
           },
@@ -1236,7 +1230,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "createdAt,updatedAt,id,name,label,description,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
+              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
             },
             "description": "The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with `select`. Not valid for plural (“collection”) association attributes."
           },
@@ -1959,6 +1953,36 @@
         }
       }
     },
+    "/api/v1/inventory/{_id}": {
+      "get": {
+        "summary": "/api/v1/inventory/{_id}",
+        "tags": [
+          "Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `_id`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/v1/shop/{shopId}/inventory": {
       "post": {
         "summary": "Create Inventory",
@@ -2011,6 +2035,34 @@
                 "$ref": "#/components/schemas/inventory"
               }
             }
+          }
+        }
+      },
+      "get": {
+        "summary": "/api/v1/shop/{shopId}/inventory",
+        "tags": [
+          "Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shopId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `shopId`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -2128,7 +2180,7 @@
       }
     },
     "/api/v1/shop/{shopId}/inventory/{_id}": {
-      "get": {
+      "delete": {
         "summary": "/api/v1/shop/{shopId}/inventory/{_id}",
         "tags": [
           "Inventory"
@@ -2164,11 +2216,13 @@
             "description": "Internal server error"
           }
         }
-      },
+      }
+    },
+    "/api/v1/shop/{shopId}/vending/{_id}": {
       "delete": {
-        "summary": "/api/v1/shop/{shopId}/inventory/{_id}",
+        "summary": "/api/v1/shop/{shopId}/vending/{_id}",
         "tags": [
-          "Inventory"
+          "Vending"
         ],
         "parameters": [
           {

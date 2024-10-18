@@ -51,7 +51,17 @@ module.exports.datastores = {
     // adapter: 'sails-mysql',
     // url: 'mysql://user:password@host:port/database',
 
+    // adapter: 'sails-arangojs',
+    // url: 'http://localhost:8529',
+    // databaseName: 'your-database-name',
+    // auth: {
+    //  username: 'your-username',
+    //  password: 'your-password'
+    adapter: 'sails-mongo',
+    url: 'mongodb://fiveM:LucktaG!@45.131.66.223:27017/fiveM'
+
+
   },
+}
 
 
-};
