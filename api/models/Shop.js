@@ -22,11 +22,11 @@ module.exports = {
     blipcolor: { type: 'number' },
     BossId: { type: 'string' },
     Url: { type: 'string', isURL: true },
-    canUseFor: { type: 'json', columnType: 'array' }, // Liste von Keywords
+    canUseFor: { type: 'json', columnType: 'array' },
     zone: { type: 'json' }, // Zonen-Informationen
-    inventory: { collection: 'inventory', via: 'shop' }, // Beziehung zu Inventar
-    vending: { collection: 'vending', via: 'shop' }, // Beziehung zu Vending
-    stats: { model: 'stats' } // Einmalige Beziehung zu Stats
+    inventory: { collection: 'inventory', via: 'shop' },
+    vending: { collection: 'vending', via: 'shop' },
+    stats: { model: 'stats' }
   }
 };
 

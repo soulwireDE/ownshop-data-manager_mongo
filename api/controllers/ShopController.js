@@ -15,6 +15,17 @@ module.exports = {
       bodyData.createdAt = Date.now();
 
       const shop = await Shop.create(req.body).fetch();
+
+      const newStats = await Stats.create({
+        shop: shop.id,
+        visitors: 0,
+        purchases: 0,
+        bought: 0,
+        sold: 0,
+        cashposition: 0,
+        transactions: 0
+      }).fetch();
+
       return res.json(shop);
     } catch (err) {
       return res.serverError(err);
@@ -22,7 +33,10 @@ module.exports = {
   },
   read: async function (req, res) {
     try {
-      const shop = await Shop.findOne({ uuid: req.params.id }).populateAll();
+      const shop = await Shop.findOne({ uuid: req.params.id })
+      .populate('stats')
+      .populate('inventory')
+      .populate('vending');
       if (!shop) return res.notFound();
       return res.json(shop);
     } catch (err) {
