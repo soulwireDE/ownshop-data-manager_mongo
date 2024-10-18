@@ -30,5 +30,9 @@ module.exports.policies = {
   },
   VendingController: {
     '*': true,
+  },
+  StatsController: {
+    '*': true,
   }
+
 };

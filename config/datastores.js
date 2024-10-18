@@ -57,8 +57,8 @@ module.exports.datastores = {
     // auth: {
     //  username: 'your-username',
     //  password: 'your-password'
-    //adapter: 'sails-mongo',
-    //url: 'mongodb://fiveM:******@45.131.66.223:27017/fiveM'
+    adapter: 'sails-mongo',
+    url: 'mongodb://fiveM:LucktaG!@45.131.66.223:27017/fiveM'
 
 
   },

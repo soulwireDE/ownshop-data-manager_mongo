@@ -80,10 +80,12 @@ module.exports.routes = {
   'PUT /api/v1/shop/:shopId/vending/:id': 'VendingController.update',
   'DELETE /api/v1/shop/:shopId/vending/:id': 'VendingController.delete',
 
-  'POST /api/v1/shop/:shopId/stats': 'StatsController.create',
-  'GET /api/v1/shop/:shopId/stats/:id': 'StatsController.read',
-  'PUT /api/v1/shop/:shopId/stats/:id': 'StatsController.update',
-  'DELETE /api/v1/shop/:shopId/stats/:id': 'StatsController.delete',
+  'POST /api/v1/shop/:shopId/stats': 'StatsController.create',  // Erstellen
+  'GET /api/v1/shop/:shopId/stats': 'StatsController.read',     // Lesen
+  'PUT /api/v1/shop/:shopId/stats': 'StatsController.update',    // Aktualisieren
+  'DELETE /api/v1/shop/:shopId/stats': 'StatsController.delete',   // Löschen
+
+
   'GET /api/v1/shop': 'ShopController.find',
   // Route to get all zones from all shops
   'GET /api/v1/shop/coords': 'ShopController.coords',
