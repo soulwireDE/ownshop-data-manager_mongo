@@ -383,3 +383,16 @@ put
 {
   "sold": 15
   }
+
+
+  post localhost:1337/api/v1/shop/0991a511-33a2-4738-908a-94ba3d06d5e9/employee
+
+  {
+    "Name": "Max Pumpe",
+    "grade": 1,
+    "empUser": "license:809cf5f180877595b66165ea9b73cdccac9828ac",
+    "passwd": "eb72e87ffc6a96f9372510391f20796f",
+    "payment": 20,
+    "reward": 20,
+    "meta": {}
+}

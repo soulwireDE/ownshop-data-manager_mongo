@@ -36,7 +36,8 @@ module.exports = {
       const shop = await Shop.findOne({ uuid: req.params.id })
       .populate('stats')
       .populate('inventory')
-      .populate('vending');
+      .populate('vending')
+      .populate('employees');
       if (!shop) return res.notFound();
       return res.json(shop);
     } catch (err) {

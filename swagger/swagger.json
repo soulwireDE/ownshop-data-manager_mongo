@@ -25,6 +25,10 @@
   },
   "tags": [
     {
+      "name": "Employees",
+      "description": "Sails blueprint actions for the **Employees** model"
+    },
+    {
       "name": "Inventory",
       "description": "Sails blueprint actions for the **Inventory** model"
     },
@@ -121,17 +125,28 @@
   ],
   "components": {
     "schemas": {
-      "employee": {
+      "employees": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/employee-without-required-constraint"
+            "$ref": "#/components/schemas/employees-without-required-constraint"
+          },
+          {
+            "required": [
+              "Name",
+              "grade",
+              "empUser",
+              "passwd",
+              "payment",
+              "reward",
+              "shop"
+            ]
           }
         ]
       },
-      "employee-without-required-constraint": {
+      "employees-without-required-constraint": {
         "type": "object",
-        "description": "Sails ORM Model **Employee**",
+        "description": "Sails ORM Model **Employees**",
         "properties": {
           "createdAt": {
             "type": "number",
@@ -144,6 +159,45 @@
           "id": {
             "type": "string",
             "uniqueItems": true
+          },
+          "Name": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "number",
+            "format": "double"
+          },
+          "empUser": {
+            "type": "string"
+          },
+          "passwd": {
+            "type": "string"
+          },
+          "isBoss": {
+            "type": "boolean",
+            "default": false
+          },
+          "payment": {
+            "type": "number",
+            "format": "double"
+          },
+          "reward": {
+            "type": "number",
+            "format": "double"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {},
+            "default": {},
+            "example": {}
+          },
+          "shop": {
+            "description": "JSON dictionary representing the **shop** instance or FK when creating / updating / not populated",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/shop"
+              }
+            ]
           }
         }
       },
@@ -301,6 +355,13 @@
                 "$ref": "#/components/schemas/stats"
               }
             ]
+          },
+          "employees": {
+            "description": "Array of **employees**'s or array of FK's when creating / updating / not populated",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/employees"
+            }
           }
         }
       },
@@ -1220,7 +1281,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
+              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats,employees"
             },
             "description": "The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes."
           },
@@ -1230,7 +1291,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats"
+              "example": "createdAt,updatedAt,id,name,label,description,uuid,ped,scenario,radius,targetIcon,targetLabel,showblip,blipsprite,blipscale,blipcolor,BossId,Url,canUseFor,zone,inventory,vending,stats,employees"
             },
             "description": "The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with `select`. Not valid for plural (“collection”) association attributes."
           },
@@ -1240,7 +1301,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "false,inventory,vending,stats"
+              "example": "false,inventory,vending,stats,employees"
             },
             "description": "If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify `false` to have no attributes populated."
           }
@@ -2231,6 +2292,62 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/shop/{shopId}/employee": {
+      "post": {
+        "summary": "Create Employees",
+        "description": "Create a new **Employees** record.",
+        "externalDocs": {
+          "url": "https://sailsjs.com/documentation/reference/blueprint-api/create",
+          "description": "See https://sailsjs.com/documentation/reference/blueprint-api/create"
+        },
+        "tags": [
+          "Employees"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shopId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `shopId`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with a JSON dictionary representing the newly created **Employees** instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/employees"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation errors; details in JSON response"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "JSON dictionary representing the Employees instance to create.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/employees"
+              }
+            }
           }
         }
       }

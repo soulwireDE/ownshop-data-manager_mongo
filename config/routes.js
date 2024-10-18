@@ -94,4 +94,9 @@ module.exports.routes = {
   'GET /api/v1/shop/:id/:zoneType': 'ShopController.getZoneByType',
   'GET /api/v1/shop/coords/:zoneType': 'ShopController.getCoordsByZoneType',
 
+  'POST /api/v1/shop/:shopId/employee': 'EmployeesController.create',
+  'PUT /api/v1/shop/:shopId/employee/:id': 'EmployeesController.update',
+  'DELETE /api/v1/shop/:shopId/employee/:id': 'EmployeesController.delete',
+
+
 };

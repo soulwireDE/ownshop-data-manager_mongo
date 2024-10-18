@@ -33,6 +33,9 @@ module.exports.policies = {
   },
   StatsController: {
     '*': true,
+  },
+  EmployeesController: {
+    '*': true,
   }
 
 };

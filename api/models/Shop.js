@@ -26,7 +26,11 @@ module.exports = {
     zone: { type: 'json' }, // Zonen-Informationen
     inventory: { collection: 'inventory', via: 'shop' },
     vending: { collection: 'vending', via: 'shop' },
-    stats: { model: 'stats' }
+    stats: { model: 'stats' },
+    employees: {
+      collection: 'employees',
+      via: 'shop'
+    },
   }
 };
 
