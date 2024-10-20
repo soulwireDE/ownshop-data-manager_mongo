@@ -13,7 +13,7 @@ module.exports = {
     sold: { type: 'number', defaultsTo: 0 },
     cashposition: { type: 'number', defaultsTo: 0 },
     transactions: { type: 'number', defaultsTo: 0 },
-    shop: { model: 'shop' } // Referenz auf den Shop
+
   }
 };
 

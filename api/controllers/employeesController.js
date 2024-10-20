@@ -13,7 +13,7 @@ module.exports = {
       const { Name, grade, empUser, passwd, isBoss, payment, reward, meta } =
         req.body;
 
-      const newEmployee = await Employee.create({
+      const newEmployee = await Employees.create({
         Name,
         grade,
         empUser,

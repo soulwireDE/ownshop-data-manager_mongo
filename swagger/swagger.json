@@ -418,14 +418,6 @@
             "type": "number",
             "format": "double",
             "default": 0
-          },
-          "shop": {
-            "description": "JSON dictionary representing the **shop** instance or FK when creating / updating / not populated",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/shop"
-              }
-            ]
           }
         }
       },
@@ -2396,6 +2388,45 @@
         "summary": "/api/v1/shop/{shopId}/vending/{_id}",
         "tags": [
           "Vending"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shopId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `shopId`"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `_id`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/shop/{shopId}/employee/{_id}": {
+      "delete": {
+        "summary": "/api/v1/shop/{shopId}/employee/{_id}",
+        "tags": [
+          "Employees"
         ],
         "parameters": [
           {

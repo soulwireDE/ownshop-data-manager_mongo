@@ -14,10 +14,8 @@ module.exports = {
       bodyData.updatedAt = Date.now();
       bodyData.createdAt = Date.now();
 
-      const shop = await Shop.create(req.body).fetch();
 
       const newStats = await Stats.create({
-        shop: shop.id,
         visitors: 0,
         purchases: 0,
         bought: 0,
@@ -25,6 +23,10 @@ module.exports = {
         cashposition: 0,
         transactions: 0
       }).fetch();
+      req.body.stats = newStats.id;
+      const shop = await Shop.create(req.body).fetch();
+
+
 
       return res.json(shop);
     } catch (err) {
@@ -63,8 +65,13 @@ module.exports = {
     }
   },
   find: async function (req, res) {
+
     try {
-      const shops = await Shop.find();
+      const shops = await Shop.find()
+      .populate('stats')
+      .populate('inventory')
+      .populate('vending')
+      .populate('employees')
       return res.json(shops);
     } catch (err) {
       return res.serverError(err);
@@ -99,13 +106,17 @@ module.exports = {
   coords: async function (req, res) {
     try {
       // Fetch all shops with their zones
-      const shops = await Shop.find().select(['id', 'zone']);
+      const shops = await Shop.find().select(['id', 'uuid', 'zone']);
 
-      // Extract and return only the zone data
-      const allZones = shops.map(shop => ({
-        id: shop.id,
-        zone: shop.zone
-      }));
+      // Create an object where the keys are the UUIDs and the values are the zone data
+      const allZones = shops.reduce((acc, shop) => {
+        acc[shop.uuid] = {
+          id: shop.id,
+          zone: shop.zone,
+          uuid: shop.uuid
+        };
+        return acc;
+      }, {});
 
       return res.json(allZones);
     } catch (err) {
